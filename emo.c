@@ -3,43 +3,30 @@
 #include<math.h>
 #include<unistd.h>
 #define pi 3.142857
+// HELLO LET ME GUIDE U THROUGH THIS
 int s_width;
 int s_height;
 int x_eyes_1=0,x_eyes_2=0,y_eyes_1=0,y_eyes_2=0;
 int  m1=0,m2=0;
 int mousex,mousey;
 int key_pressed;
+//This function decides the position of eyes based on the pointer position
 void mouse_pointer(int x,int y){
 mousex=x;
 mousey=y;
-//printf("%d,%d\n",y,s_height/2-75);
-//m1=slope(s_width/2-100,s_height/2-75,x,y);
-//m2=slope(s_width/2+100,s_height/2-75,x,y);
-//printf("%f\n",atan(m1)*180/M_PI);
 x_eyes_1=20*cos(atan2(x-(s_width/2-100),y-(s_height/2-75)));
 x_eyes_2=20*cos(atan2(x-(s_width/2+100),y-(s_height/2-75)));
 y_eyes_1=20*sin(atan2(x-(s_width/2-100),y-(s_height/2-75)));
 y_eyes_2=20*sin(atan2(x-(s_width/2+100),y-(s_height/2-75)));
 glutPostRedisplay();
 }
-// function to initialize
-void circle(int radius,float x,float y){
-   glBegin(GL_POINTS);
-   for (int  i = 0; i < (2*pi); i += 0.01)
-    {
-        // let 200 is radius of circle and as,
-        // circle is defined as x=r*cos(i) and y=r*sin(i)
-        float x_plot = x + (radius * cos(i));
-        float y_plot = y + (radius * sin(i));
-        glVertex2i(x_plot, y_plot);
-    }
-}
+//This function takes care of the key presses
 void keyboard(unsigned char key,int x,int y){
   key_pressed=key;
   printf("%d %c\n",key,key);
   glutPostRedisplay();
 }
-
+//This function helps to set things up
 void myInit (void)
 {
     // making background color black as first
@@ -47,14 +34,11 @@ void myInit (void)
     glClearColor(0.0, 0.0, 0.0, 1.0);
     s_width=glutGet(GLUT_SCREEN_WIDTH);
     s_height=glutGet(GLUT_SCREEN_HEIGHT);
-    // making picture color green (in RGB mode), as middle argument is 1.0
     glColor3f(1.0, 1.0, 0.0);
-    // breadth of picture boundary is 1 pixel
+    // sets breadth of picture boundary
     glPointSize(10.5);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    // setting window dimension in X- and Y- direction
-    //gluOrtho2D(0,1000, 1000,0);
     glOrtho(0.0f,glutGet(GLUT_SCREEN_WIDTH),glutGet(GLUT_SCREEN_HEIGHT),0.0f,0.0f,1.0f);
 }
 
@@ -67,10 +51,14 @@ void display (void)
   if(key_pressed==98||key_pressed==99){
   x_eyes_1=x_eyes_2=y_eyes_1=y_eyes_2=0;
   }
-
+//here starts the dreadzone of the for loops it sounds like a book name :)))
+// i have written a lot for for loops for basically the very similar tasks
+// i am not proud of it 
+    
     // iterate y up to 2*pi, i.e., 360 degree
     // with small increment in angle as
     // glVertex2i just draws a point on specified co-ordinate
+//This draws the base emoji outline
    for ( i = 0; i < (2*pi); i += 0.01)
     {
         // let 200 is radius of circle and as,
@@ -79,6 +67,7 @@ void display (void)
         y =s_height/2 + 220 * sin(i);
         glVertex2i(x, y);
     }
+// this is draws the eyes which follow the mouse pointer
    for (i = 0; i < (2*pi); i += 0.01)
     {
         // let 200 is radius of circle and as,
@@ -90,9 +79,13 @@ void display (void)
         glVertex2i(z,w);
         glVertex2i(x,y);
     }
+// this is the center of the eye 
+// its drawn seperately for some reason
     glVertex2i(-x_eyes_1+s_width/2-100,y_eyes_1+s_height/2-75);
     glVertex2i(-x_eyes_2+s_width/2+100,y_eyes_2+s_height/2-75);
+//this are the various reactions to the key_pressed
     switch(key_pressed){
+// this is happy
     case 104:
     for (float j=0.75; j<2.35; j+= 0.01){
         // let 200 is radius of circle and as,
@@ -102,7 +95,8 @@ void display (void)
         glVertex2i(a,b);
         }
         break;
-   case 115:
+// this is sad    
+    case 115:
     for (float j=-0.75; j>-2.35; j-= 0.01){
         // let 200 is radius of circle and as,
         // circle is defined as x=r*cos(i) and y=r*sin(i)
@@ -111,7 +105,8 @@ void display (void)
         glVertex2i(a,b);
         }
         break;
-  case 98:
+//this is blush    
+    case 98:
     for(float j=0.75; j<2.35; j+= 0.01){
         // let 200 is radius of circle and as,
         // circle is defined as x=r*cos(i) and y=r*sin(i)
@@ -132,6 +127,7 @@ void display (void)
         glVertex2i(x,y);}
         }
     break;
+// this is cry
    case 99:
     for (float j=-0.75; j>-2.35; j-= 0.01){
         // let 200 is radius of circle and as,
@@ -155,6 +151,7 @@ void display (void)
         }
     }
    break;
+// this is astonished maybe
    case 111:
       for ( i = 0; i < (2*pi); i += 0.01)
     {
