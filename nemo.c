@@ -3,7 +3,6 @@
 #include<math.h>
 #include<unistd.h>
 #include <emscripten.h>
-
 #define pi 3.142857
 // HELLO LET ME GUIDE U THROUGH THIS
 int s_width;
@@ -12,8 +11,6 @@ int x_eyes_1=0,x_eyes_2=0,y_eyes_1=0,y_eyes_2=0;
 int  m1=0,m2=0;
 int mousex,mousey;
 int key_pressed;
-
- float x, y, i;
 //This function decides the position of eyes based on the pointer position
 void mouse_pointer(int x,int y){
 mousex=x;
@@ -24,98 +21,12 @@ y_eyes_1=20*sin(atan2(x-(s_width/2-100),y-(s_height/2-75)));
 y_eyes_2=20*sin(atan2(x-(s_width/2+100),y-(s_height/2-75)));
 glutPostRedisplay();
 }
-
-void EMSCRIPTEN_KEEPALIVE nemoHappy(){
-    glClear(GL_COLOR_BUFFER_BIT);
-    glBegin(GL_POINTS);
-    glColor3f(1.0,1.0,0.0);
-    for (float j=0.75; j<2.35; j+= 0.01){
-        // let 200 is radius of circle and as,
-        // circle is defined as x=r*cos(i) and y=r*sin(i)
-        float a= s_width/2+(125  *  cos(j));
-        float b= s_height/2+(125 * sin(j));
-        glVertex2i(a,b);
-    }
-    glVertex2i(-x_eyes_1+s_width/2-100,y_eyes_1+s_height/2-75);
-    glVertex2i(-x_eyes_2+s_width/2+100,y_eyes_2+s_height/2-75);
-    glEnd();
-    glFlush();
-    glutPostRedisplay();
-}
-
-void EMSCRIPTEN_KEEPALIVE nemoSad(){
-    for (float j=-0.75; j>-2.35; j-= 0.01){
-        // let 200 is radius of circle and as,
-        // circle is defined as x=r*cos(i) and y=r*sin(i)
-        float a= s_width/2+(125  *  cos(j));
-        float b= s_height/2+175+(125 * sin(j));
-        glVertex2i(a,b);
-    }
-    glutPostRedisplay();
-}
-
-void EMSCRIPTEN_KEEPALIVE nemoBlush(){
-    for(float j=0.75; j<2.35; j+= 0.01){
-        // let 200 is radius of circle and as,
-        // circle is defined as x=r*cos(i) and y=r*sin(i)
-        float a= s_width/2+( 125  *  cos(j));
-        float b= s_height/2+(125 * sin(j));
-        glVertex2i(a,b);
-        }
-    for (i = 0; i < (2*pi); i += 0.01){
-        // let 200 is radius of circle and as,
-        // circle is defined as x=r*cos(i) and y=r*sin(i)
-        for(float e=6;e<30;e+=0.01){
-        x=s_width/2-125+(e*cos(i));
-        y=s_height/2+25+(e* sin(i));
-        float z=(s_width/2)+125+((e*cos(i)));
-        float w=(s_height/2)+25+(e*sin(i));
-        glColor3f(1.0, 1.0, 0.0);
-        glVertex2i(z,w);
-        glVertex2i(x,y);}
-    }
-    glutPostRedisplay();
-}
-
-void EMSCRIPTEN_KEEPALIVE nemoCry(){
-    for (float j=-0.75; j>-2.35; j-= 0.01){
-        // let 200 is radius of circle and as,
-        // circle is defined as x=r*cos(i) and y=r*sin(i)
-        float a= s_width/2+(125  *  cos(j));
-        float b= s_height/2+175+(125 * sin(j));
-        glVertex2i(a,b);
-    }
-    glColor3f(0.0,1.0,1.0);
-    for (i = 0; i < (2*pi); i += 0.01)
-    {
-        // let 200 is radius of circle and as,
-        // circle is defined as x=r*cos(i) and y=r*sin(i)
-        for(int j=75;j>50;j--){
-        x =s_width/2-100+(5*cos(i));
-        y =s_height/2-j+8+(5* sin(i));
-        float z=(s_width/2)+100+((5*cos(i)));
-        float w=(s_height/2)-j+8+(5*sin(i));
-        glVertex2i(z,w);
-        glVertex2i(x,y);
-        }
-    }
-    glutPostRedisplay();
-}
-
-void EMSCRIPTEN_KEEPALIVE nemoAstonished(){
-    for ( i = 0; i < (2*pi); i += 0.01)
-    {
-        // let 200 is radius of circle and as,
-        // circle is defined as x=r*cos(i) and y=r*sin(i)
-        x =s_width/2  + 20 * cos(i);
-        y =s_height/2+150 + 20 * sin(i);
-        glVertex2i(x, y);
-    }
-    glutPostRedisplay();
-}
-
 //This function takes care of the key presses
-
+void keyboard(unsigned char key,int x,int y){
+  key_pressed=key;
+  printf("%d %c\n",key,key);
+  glutPostRedisplay();
+}
 //This function helps to set things up
 void myInit (void)
 {
@@ -173,8 +84,99 @@ void display (void)
 // its drawn seperately for some reason
     glVertex2i(-x_eyes_1+s_width/2-100,y_eyes_1+s_height/2-75);
     glVertex2i(-x_eyes_2+s_width/2+100,y_eyes_2+s_height/2-75);
+//this are the various reactions to the key_pressed
+    switch(key_pressed){
+// this is happy
+    case 104:
+    for (float j=0.75; j<2.35; j+= 0.01){
+        // let 200 is radius of circle and as,
+        // circle is defined as x=r*cos(i) and y=r*sin(i)
+        float a= s_width/2+(125  *  cos(j));
+        float b= s_height/2+(125 * sin(j));
+        glVertex2i(a,b);
+        }
+        break;
+// this is sad    
+    case 115:
+    for (float j=-0.75; j>-2.35; j-= 0.01){
+        // let 200 is radius of circle and as,
+        // circle is defined as x=r*cos(i) and y=r*sin(i)
+        float a= s_width/2+(125  *  cos(j));
+        float b= s_height/2+175+(125 * sin(j));
+        glVertex2i(a,b);
+        }
+        break;
+//this is blush    
+    case 98:
+    for(float j=0.75; j<2.35; j+= 0.01){
+        // let 200 is radius of circle and as,
+        // circle is defined as x=r*cos(i) and y=r*sin(i)
+        float a= s_width/2+( 125  *  cos(j));
+        float b= s_height/2+(125 * sin(j));
+        glVertex2i(a,b);
+        }
+    for (i = 0; i < (2*pi); i += 0.01){
+        // let 200 is radius of circle and as,
+        // circle is defined as x=r*cos(i) and y=r*sin(i)
+        for(float e=6;e<30;e+=0.01){
+        x=s_width/2-125+(e*cos(i));
+        y=s_height/2+25+(e* sin(i));
+        float z=(s_width/2)+125+((e*cos(i)));
+        float w=(s_height/2)+25+(e*sin(i));
+       glColor4f(1.0,0.0,0.0,0.3);
+        glVertex2i(z,w);
+        glVertex2i(x,y);}
+        }
+    break;
+// this is cry
+   case 99:
+    for (float j=-0.75; j>-2.35; j-= 0.01){
+        // let 200 is radius of circle and as,
+        // circle is defined as x=r*cos(i) and y=r*sin(i)
+        float a= s_width/2+(125  *  cos(j));
+        float b= s_height/2+175+(125 * sin(j));
+        glVertex2i(a,b);
+     }
+   glColor3f(0.0,1.0,1.0);
+   for (i = 0; i < (2*pi); i += 0.01)
+    {
+        // let 200 is radius of circle and as,
+        // circle is defined as x=r*cos(i) and y=r*sin(i)
+        for(int j=75;j>50;j--){
+        x =s_width/2-100+(5*cos(i));
+        y =s_height/2-j+8+(5* sin(i));
+        float z=(s_width/2)+100+((5*cos(i)));
+        float w=(s_height/2)-j+8+(5*sin(i));
+        glVertex2i(z,w);
+        glVertex2i(x,y);
+        }
+    }
+   break;
+// this is astonished maybe
+   case 111:
+      for ( i = 0; i < (2*pi); i += 0.01)
+    {
+        // let 200 is radius of circle and as,
+        // circle is defined as x=r*cos(i) and y=r*sin(i)
+        x =s_width/2  + 20 * cos(i);
+        y =s_height/2+150 + 20 * sin(i);
+        glVertex2i(x, y);
+    }
+   default:
+    for(float j=s_width/2-75;j<s_width/2+75;j+=0.01){
+    float p=j;
+    float q=s_height/2+75;
+    glVertex2i(p,q);
+    }
+   }
     glEnd();
     glFlush();
+}
+
+EMSCRIPTEN_KEEPALIVE
+void registerKeyboardCallback()
+{
+    glutKeyboardFunc(keyboard);
 }
 int main (int argc, char** argv)
 {
@@ -187,8 +189,7 @@ int main (int argc, char** argv)
     glutCreateWindow("Emo-Interactive Emoji");
     myInit();
     glutDisplayFunc(display);
-    // glutKeyboardFunc(keyboard);
+    glutKeyboardFunc(keyboard);
     glutPassiveMotionFunc(mouse_pointer);
     glutMainLoop();
 }
-
