@@ -26,6 +26,9 @@ glutPostRedisplay();
 }
 
 void EMSCRIPTEN_KEEPALIVE nemoHappy(){
+    glClear(GL_COLOR_BUFFER_BIT);
+    glBegin(GL_POINTS);
+    glColor3f(1.0,1.0,0.0);
     for (float j=0.75; j<2.35; j+= 0.01){
         // let 200 is radius of circle and as,
         // circle is defined as x=r*cos(i) and y=r*sin(i)
@@ -33,6 +36,10 @@ void EMSCRIPTEN_KEEPALIVE nemoHappy(){
         float b= s_height/2+(125 * sin(j));
         glVertex2i(a,b);
     }
+    glVertex2i(-x_eyes_1+s_width/2-100,y_eyes_1+s_height/2-75);
+    glVertex2i(-x_eyes_2+s_width/2+100,y_eyes_2+s_height/2-75);
+    glEnd();
+    glFlush();
     glutPostRedisplay();
 }
 
