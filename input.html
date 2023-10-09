@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    </head>
+<body class="w3-black">
+
+<div class="w3-padding-32 w3-display-middle">
+    <input type="text" id="say" name="fname" placeholder="Whats on your mind">
+    <br>
+    <br>
+    <button type="submit" value="Submit" id = "tellme">Tell Emo!</button>
+    <div id="feeling" style="display: none;"></div>
+</div>
+
+
+<script>
+
+   let button = document.getElementById("tellme")
+   let input = document.getElementById("say")
+   button.addEventListener('click',async function(){
+    let json_body = {
+        "userinput":input.value
+    }
+    const settings = {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body:JSON.stringify(json_body)
+    };
+    const fetchResponse = await fetch(window.location.origin + '/feeling', settings);
+    const data = await fetchResponse.json();
+    let div = document.getElementById("feeling")
+    div.innerText = data.feeling
+   })
+</script>
+
+
+</body>
+</html>

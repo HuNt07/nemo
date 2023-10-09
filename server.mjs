@@ -15,10 +15,10 @@ app.use(express.json())
 
 
 // // Define the static file directory
-// const publicDirectoryPath = path.join(__dirname, 'public');
+const publicDirectoryPath = path.join(__dirname, '/');
 
 // // Serve static files (e.g., index.html)
-// app.use(express.static(publicDirectoryPath));
+app.use(express.static(publicDirectoryPath));
 app.get('/', function(req, res) {
   res.sendFile('index.html', { root: __dirname });
 });
