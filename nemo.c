@@ -22,7 +22,7 @@ y_eyes_2=20*sin(atan2(x-(s_width/2+100),y-(s_height/2-75)));
 glutPostRedisplay();
 }
 //This function takes care of the key presses
-EMSCRIPTEN_KEEPALIVE void keyboard(unsigned char key){
+EMSCRIPTEN_KEEPALIVE void keyboard(int key){
   key_pressed=key;
   printf("%d %c\n",key,key);
   glutPostRedisplay();
@@ -49,9 +49,9 @@ void display (void)
     glBegin(GL_POINTS);
     glColor3f(1.0,1.0,0.0);
     float x, y, i;
-  if(key_pressed==98||key_pressed==99){
-  x_eyes_1=x_eyes_2=y_eyes_1=y_eyes_2=0;
-  }
+    if(key_pressed==98||key_pressed==99){
+        x_eyes_1=x_eyes_2=y_eyes_1=y_eyes_2=0;
+    }
 //here starts the dreadzone of the for loops it sounds like a book name :)))
 // i have written a lot for for loops for basically the very similar tasks
 // i am not proud of it 
