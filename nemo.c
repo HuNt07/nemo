@@ -22,7 +22,7 @@ y_eyes_2=20*sin(atan2(x-(s_width/2+100),y-(s_height/2-75)));
 glutPostRedisplay();
 }
 //This function takes care of the key presses
-void keyboard(unsigned char key,int x,int y){
+EMSCRIPTEN_KEEPALIVE void keyboard(unsigned char key){
   key_pressed=key;
   printf("%d %c\n",key,key);
   glutPostRedisplay();
@@ -173,11 +173,6 @@ void display (void)
     glFlush();
 }
 
-EMSCRIPTEN_KEEPALIVE
-void registerKeyboardCallback()
-{
-    glutKeyboardFunc(keyboard);
-}
 int main (int argc, char** argv)
 {
     glutInit(&argc, argv);
@@ -189,7 +184,6 @@ int main (int argc, char** argv)
     glutCreateWindow("Emo-Interactive Emoji");
     myInit();
     glutDisplayFunc(display);
-    glutKeyboardFunc(keyboard);
     glutPassiveMotionFunc(mouse_pointer);
     glutMainLoop();
 }
