@@ -1,17 +1,36 @@
-# Emo(An Interactive Emoticon)
-## Problem Defination
-### We are paying a sort of tribute to the emoji/emoticon which allows us to truly express in a modern converstion by building a interactive experience around it,the mouse and the keyboard.
-## Setup
-`sudo apt-get install freeglut3-dev`-Run this command on your Linux terminal to install GLUT<br><br>
-`gcc -o emo emo.c -lGL -lGLU -lglut -lm`-Run this command to compile Emo on your machine<br><br>
-`./emo `-Run this to C the output
-## The file emo.c is a little messy but it works just fine :))
-## Keyboard Controls
-|Key|Emotion| 
-|----|------|
-|S|Sad|
-|H|Happy|
-|B|Blush|
-|C|Cry|
-|N|Neutral|
-## Eyes follow the Mouse Pointer they try.
+
+# Nemo
+
+This is a Web Assembly port for the project
+[emo](https://github.com/sokumon/emo)
+\
+In this port we use Natural Language instead of keyboard and mouse
+
+
+
+## Build from source
+Clone directory
+```bash
+   git clone https://github.com/hunt07/nemo
+```
+Change directory
+```bash
+   cd nemo
+```
+Install
+```bash
+   .\install_compiler.sh
+```
+Build again
+```bash
+   make clean
+   make
+```
+Node install
+```bash
+   npm install
+```
+Server is starting
+```bash
+   node server.mjs
+```
