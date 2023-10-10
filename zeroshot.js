@@ -25,7 +25,7 @@ async function doZeroShot(input){
     inputs: [
       input
     ],
-    parameters: { candidate_labels: ['sad', 'happy', 'neutral', 'blush', 'cry'] }
+    parameters: { candidate_labels: ['sad', 'happy', 'neutral', 'astonished', 'cry'] }
     
 })
 

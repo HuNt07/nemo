@@ -10,6 +10,13 @@
     <iframe src="nemo.html" id="nemo" scrolling="no"></iframe>
     <iframe src="input.html" id="chat"></iframe>
     <script>
+        let key_mappings={
+            "happy":104,
+            "sad":115,
+            "cry":99,
+            "neutral":1,
+            "astonished":111
+        }
         let nemo = document.getElementById("nemo")
         let chat = document.getElementById("chat")
         nemo.width = window.innerWidth/2;
@@ -17,11 +24,9 @@
         let chat_window =  chat.contentWindow.document
         let nemowindow = nemo.contentWindow.document
         setInterval(function(){
-            let feeling = chat.contentDocument.getElementById('feeling').innerHTML
-            if (feeling != ""){
-                if(feeling == "sad"){
-                    nemo.dispatchEvent(new KeyboardEvent('keydown', {'key': 's'}));
-                }
+            let current_feeling = localStorage.getItem("feeling")
+            if (current_feeling){
+                nemo.contentWindow._keyboard(key_mappings[current_feeling]);
             }
         },1000)
     </script>

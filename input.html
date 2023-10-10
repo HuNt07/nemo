@@ -33,7 +33,7 @@
     const fetchResponse = await fetch(window.location.origin + '/feeling', settings);
     const data = await fetchResponse.json();
     let div = document.getElementById("feeling")
-    div.innerText = data.feeling
+    localStorage.setItem("feeling",data.feeling)
    })
 </script>
 

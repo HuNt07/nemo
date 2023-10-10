@@ -123,7 +123,6 @@ void display (void)
         y=s_height/2+25+(e* sin(i));
         float z=(s_width/2)+125+((e*cos(i)));
         float w=(s_height/2)+25+(e*sin(i));
-       glColor4f(1.0,0.0,0.0,0.3);
         glVertex2i(z,w);
         glVertex2i(x,y);}
         }
@@ -162,6 +161,7 @@ void display (void)
         y =s_height/2+150 + 20 * sin(i);
         glVertex2i(x, y);
     }
+    break;
    default:
     for(float j=s_width/2-75;j<s_width/2+75;j+=0.01){
     float p=j;
